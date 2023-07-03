@@ -12,6 +12,12 @@ Created on Jul 03, 2023 12:58:13
 # to permenantly go back, use git reset
 # git checkout allows you to check the previous version
 
+# day 16 building graphic user interfaces (GUI)
+# frontend and backend
+# frontend : code base that constructs user interface
+# backend : interats with the frontend, processes data
+
+
 import functions14
 import time                     # standard module
 # right click > go to > implementations
