@@ -8,7 +8,9 @@ Created on Jul 03, 2023 12:58:13
 # Day 16 lectures
 
 # from day 15 - first git integration
-
+# to go back to previous versions git checkout, git reset
+# to permenantly go back, use git reset
+# git checkout allows you to check the previous version
 
 import functions14
 import time                     # standard module
