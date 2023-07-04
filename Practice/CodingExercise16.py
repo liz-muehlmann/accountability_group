@@ -1,6 +1,7 @@
 # building a GUI
 
 import PySimpleGUI as sg
+from converter14 import convert
 
 label1 = sg.Text("Enter feet: ")
 inputBox1 = sg.InputText(key="feet")
@@ -18,11 +19,10 @@ while True:
     event, values = window.read()
     print(1,event)
     print(2,values)
-    match event:
-        case "Convert":
-            meters = 0.3 * int(values["feet"]) + 0.025 * int(values["inches"])
-            window["output"].update(value=f"{meters}m")
+    feet = float(values["feet"])
+    inches = float(values["inches"])
+    meters = convert(feet,inches)
+    window["output"].update(value=f"{meters}m", text_color="white")
 
 
-window.read()
 window.close()
