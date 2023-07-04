@@ -12,11 +12,12 @@ sg.theme("DarkGrey5")       #pysimplegui themes
 clock = sg.Text('',key='clock')
 label = sg.Text("Type in a to-do")          #Text is the type, "" is the instance
 input_box = sg.InputText(tooltip = "Enter todo", key = "todo")
-add_button = sg.Button('Add')
+add_button = sg.Button(image_source="add.png", key="Add", tooltip="Add a todo")
+#or, leave as 'add' and can add mouseover_colors = "color"
 list_box = sg.Listbox(values=functions.get_todos(), key='todos',
                       enable_events=True, size = [45,8])
 edit_button = sg.Button('Edit')
-complete_button = sg.Button('Complete')
+complete_button = sg.Button(key='Complete', image_source="complete.png",tooltip="Complete")
 exit_button = sg.Button('Exit')
 
 layout = [[clock],
@@ -43,7 +44,7 @@ while True:                 # keeps the window open
     match event:
         case "Add":
             todos = functions.get_todos()
-            new_todo = (values['todo']+"\n").capitalize()
+            new_todo = (values['todo'] + "\n").capitalize()
             todos.append(new_todo)
             functions.write_todos(todos)
             window['todos'].update(values=todos)
@@ -69,7 +70,7 @@ while True:                 # keeps the window open
                 todo_to_complete = values['todos'][0]
                 todos = functions.get_todos()
                 todos.remove(todo_to_complete)
-                functions.write(todos)
+                functions.write_todos
                 window['todos'].update(values=todos)
                 window['todo'].update(value='')
             except IndexError:
