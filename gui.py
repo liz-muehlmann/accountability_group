@@ -1,10 +1,18 @@
 ##### created by boyun
 ##### Jul 03, 2023 13:31:31
 # gui for to-do app
+# creating a standalone executable (see lecture 177 for windows and linux)
+# here I wanted to use platypus
+# watch lecture 177 from 10:45 when I have platypus figured out
 
 import functions
 import PySimpleGUI as sg
 import time
+import os
+
+if not os.path.exists("todos.txt"):             #the txt file will be created if it doesn't exist yet
+    with open("todos.txt", "w") as file
+        pass
 
 sg.theme("DarkGrey5")       #pysimplegui themes
 
