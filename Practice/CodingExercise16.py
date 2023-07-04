@@ -23,13 +23,16 @@ while True:
     print(1, event)
     print(2, values)
     match event:
-        case "Convert":
-            feet = float(values["feet"])
-            inches = float(values["inches"])
-            meters = convert(feet,inches)
-            window["output"].update(value=f"{meters}m", text_color="white")
-        case "Exit":
-            break
+            case "Convert":
+                try:
+                    feet = float(values["feet"])
+                    inches = float(values["inches"])
+                    meters = convert(feet,inches)
+                    window["output"].update(value=f"{meters}m", text_color="white")
+                except:
+                    sg.popup("Please provide two numbers")
+            case "Exit":
+                break
 
 
 window.close()
