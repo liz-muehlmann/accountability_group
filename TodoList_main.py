@@ -5,20 +5,12 @@ Created on Jul 03, 2023 12:58:13
 
 @author: boyun
 """
-# Day 16 lectures
+# Day 18 lectures
 
-# from day 15 - first git integration
-# to go back to previous versions git checkout, git reset
-# to permenantly go back, use git reset
-# git checkout allows you to check the previous version
-
-# day 16 building graphic user interfaces (GUI)
-# frontend and backend
-# frontend : code base that constructs user interface
-# backend : interats with the frontend, processes data
+# adding complete and exit buttons
 
 
-import functions14
+import functions
 import time                     # standard module
 # right click > go to > implementations
 
@@ -29,14 +21,14 @@ while True:
     user_action = input("Type add, show, edit, complete, or exit. ")
     user_action = user_action.lower().strip()
 
-    todos = functions14.get_todos()
+    todos = functions.get_todos()
 
     if user_action.startswith("add"):
         todo = user_action[4:]
 
         todos.append(todo.capitalize() + "\n")
 
-        functions14.write_todos(todos)
+        functions.write_todos(todos)
 
     elif user_action.startswith("show"):
         print("You have ", len(todos), " items on your todo list")
@@ -54,7 +46,7 @@ while True:
             new_todo = input("What would you like to replace '" + existing_todo.strip('\n') + "' with? ")
             todos[number - 1] = new_todo + '\n'
 
-            functions14.write_todos(todos)                   # in the perenteses: the argument value
+            functions.write_todos(todos)                   # in the perenteses: the argument value
 
             print("Successfully edited!")
         except ValueError:
@@ -73,7 +65,7 @@ while True:
 
             todos.pop(index)
 
-            functions14.write_todos(todos)
+            functions.write_todos(todos)
 
             print(f"'{todo_to_remove}' is complete. Good job!")
          except ValueError:
