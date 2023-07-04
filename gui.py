@@ -3,24 +3,24 @@
 # gui for to-do app
 
 import functions
+import PySimpleGUI as sg
+import time
 
-# using third party libraries
-# find more in pypi.org
-# pysimplegui
+sg.theme("DarkGrey5")       #pysimplegui themes
 
-import PySimpleGUI as sg        #simplifies!
 
-# the different instances
+clock = sg.Text('',key='clock')
 label = sg.Text("Type in a to-do")          #Text is the type, "" is the instance
 input_box = sg.InputText(tooltip = "Enter todo", key = "todo")
 add_button = sg.Button('Add')
 list_box = sg.Listbox(values=functions.get_todos(), key='todos',
-                      enable_events=True, size = [45,10])
+                      enable_events=True, size = [45,8])
 edit_button = sg.Button('Edit')
 complete_button = sg.Button('Complete')
 exit_button = sg.Button('Exit')
 
-layout = [[label],
+layout = [[clock],
+          [label],
           [input_box, add_button],
           [list_box, edit_button, complete_button],
           [exit_button]]
@@ -38,10 +38,8 @@ window = sg.Window('My Todo App',
 # note that you need all the brackets
 # and every instance has to be sg widget
 while True:                 # keeps the window open
-    event, values = window.read()
-    print(1,event)
-    print(2,values)
-    print(3,values['todos'])
+    event, values = window.read(timeout=200)
+    window["clock"].update(value=time.strftime("%b %d, %Y %H:%M:%S"))
     match event:
         case "Add":
             todos = functions.get_todos()
@@ -51,25 +49,31 @@ while True:                 # keeps the window open
             window['todos'].update(values=todos)
 
         case "Edit":
-            todo_to_edit = values['todos'][0]
-            new_todo = (values['todo']).capitalize()
+            try:
+                todo_to_edit = values['todos'][0]
+                new_todo = (values['todo']).capitalize()
 
-            todos = functions.get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo
-            functions14.write_todos(todos)
-            window['todos'].update(values=todos)        #to update in real time
+                todos = functions.get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo
+                functions.write_todos(todos)
+                window['todos'].update(values=todos)        #to update in real time
+            except IndexError:
+                sg.popup("Please select an item first", font=("Helvetica", 15))
 
         case 'todos':
             window['todo'].update(value=values['todos'][0]) #so that it shows whatever I'm selecing
 
         case "Complete":
-            todo_to_complete = values['todos'][0]
-            todos = functions.get_todos()
-            todos.remove(todo_to_complete)
-            functions.write(todos)
-            window['todos'].update(values=todos)
-            window['todo'].update(value='')
+            try:
+                todo_to_complete = values['todos'][0]
+                todos = functions.get_todos()
+                todos.remove(todo_to_complete)
+                functions.write(todos)
+                window['todos'].update(values=todos)
+                window['todo'].update(value='')
+            except IndexError:
+                sg.popup("Please select an item first", font=("Helvetica", 15))
 
         case "Exit":
             break
