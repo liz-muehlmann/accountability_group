@@ -10,19 +10,26 @@ inputBox2 = sg.InputText(key="inches")
 convert_button = sg.Button('Convert')
 output_label = sg.Text(key="output")
 
+exit_button = sg.Button("Exit")
+
 window = sg.Window('Convertor',
                    layout=[[label1,inputBox1],
                            [label2,inputBox2],
-                           [convert_button,output_label]])
+                           [convert_button,output_label],
+                           [exit_button]])
 
 while True:
     event, values = window.read()
-    print(1,event)
-    print(2,values)
-    feet = float(values["feet"])
-    inches = float(values["inches"])
-    meters = convert(feet,inches)
-    window["output"].update(value=f"{meters}m", text_color="white")
+    print(1, event)
+    print(2, values)
+    match event:
+        case "Convert":
+            feet = float(values["feet"])
+            inches = float(values["inches"])
+            meters = convert(feet,inches)
+            window["output"].update(value=f"{meters}m", text_color="white")
+        case "Exit":
+            break
 
 
 window.close()
