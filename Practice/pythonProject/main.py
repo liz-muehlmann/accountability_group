@@ -27,6 +27,7 @@ for index, row in df.iterrows():
 # print("Hello")
     for i in range(row["Pages"] - 1):
         pdf.add_page()
+    # this is called the nested loop
 
 
 pdf.output("output.pdf")
