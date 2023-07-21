@@ -10,6 +10,8 @@ pdf = FPDF(orientation="P", unit="mm", format="A4")
 
 df = pd.read_csv("topics.csv")
 
+#The topics become headers for each page
+
 for index, row in df.iterrows():
     pdf.add_page()
     pdf.set_font(family="Times", style="B", size=24)
@@ -18,6 +20,14 @@ for index, row in df.iterrows():
          ln=1)
     pdf.line(10,22,200,22)
 
+# next I want to create the number of pages that the csv file shows
+# use for loop
+# x=3
+# for i in range(x):
+# print("Hello")
+    for i in range(row["Pages"] - 1):
+        pdf.add_page()
 
 
 pdf.output("output.pdf")
+
