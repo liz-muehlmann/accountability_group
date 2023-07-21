@@ -11,6 +11,8 @@ pdf.set_auto_page_break(auto=False, margin=0)
 
 df = pd.read_csv("topics.csv")
 
+
+
 #The topics become headers for each page
 
 for index, row in df.iterrows():
@@ -24,10 +26,16 @@ for index, row in df.iterrows():
     pdf.line(10,22,200,22)
 
     # set the footer
-    pdf.ln(265)
+    pdf.ln(265)         #line break
     pdf.set_font(family="Times", style="I", size=8)
     pdf.set_text_color(180, 180, 180)
     pdf.cell(w=0, h=10, txt=row["Topic"], align="R")
+
+    # line coordinates
+    x = 22
+    while x < 265:
+        x = x + 7
+        pdf.line(10, x, 200, x)
 
     # next I want to create the number of pages that the csv file shows
     # use for loop
@@ -44,6 +52,10 @@ for index, row in df.iterrows():
         pdf.set_text_color(180,180,180)
         pdf.cell(w=0, h=10, txt = row["Topic"], align = "R")
 
+    x = 22
+    while x < 265:
+        x = x + 7
+        pdf.line(10, x, 200, x)
 
 
 
